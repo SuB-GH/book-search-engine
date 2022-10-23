@@ -1,0 +1,53 @@
+//to-do: Define the necessary Query and Mutation types here:
+const { gql } = require('apollo-server-express');
+
+// make sure "me" query type returns a User type.
+//removed "friendCount: Int" from type User
+//remove "reactionCount: Int" from type Thought
+const typeDefs = gql`
+  type User {
+    _id: ID
+    username: String
+    email: String    
+    thoughts: [Thought]
+    friends: [User]
+  }
+
+  type Thought {
+    _id: ID
+    thoughtText: String
+    createdAt: String
+    username: String
+    reactions: [Reaction]
+  }
+
+  type Reaction {
+    _id: ID
+    reactionBody: String
+    createdAt: String
+    username: String
+  }
+
+  type Auth {
+    token: ID!
+    user: User
+  }
+
+  type Query {
+    me: User
+    users: [User]
+    user(username: String!): User
+    thoughts(username: String): [Thought]
+    thought(_id: ID!): Thought
+  }
+
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    addThought(thoughtText: String!): Thought
+    addReaction(thoughtId: ID!, reactionBody: String!): Thought
+    addFriend(friendId: ID!): User
+  }
+`;
+
+module.exports = typeDefs;
