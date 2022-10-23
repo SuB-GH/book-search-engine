@@ -1,11 +1,14 @@
+//to-do: Define the necessary Query and Mutation types here:
 const { gql } = require('apollo-server-express');
 
+// make sure "me" query type returns a User type.
+//removed "friendCount: Int" from type User
+//remove "reactionCount: Int" from type Thought
 const typeDefs = gql`
   type User {
     _id: ID
     username: String
-    email: String
-    friendCount: Int
+    email: String    
     thoughts: [Thought]
     friends: [User]
   }
@@ -15,7 +18,6 @@ const typeDefs = gql`
     thoughtText: String
     createdAt: String
     username: String
-    reactionCount: Int
     reactions: [Reaction]
   }
 
